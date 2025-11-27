@@ -5,8 +5,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Lock, LogIn } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-// ⚠️ Import service login thật (bạn cần tạo file này trước trong bước Tích hợp API)
-import { login } from '@/services/auth.service'; 
+import { login as apiLogin } from '@/services/auth.service'; 
+import { useAuth } from '@/context/AuthContext';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ export default function LoginPage() {
     password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,20 +26,25 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     
-    try {
-        // Gọi API thật
-        const response = await login(formData);
+ try {
+        const response = await apiLogin(formData); 
         
-        // Lưu token (nếu backend trả về token)
         if (response && response.token) {
-            localStorage.setItem('token', response.token);
-            // TODO: Cân nhắc dùng cookies để bảo mật hơn (ví dụ: thư viện 'js-cookie' hoặc 'cookies-next')
-        }
+            login({
+                token: response.token,
+                username: response.username,
+                role: response.role 
+            });
 
-        alert('Đăng nhập thành công!');
-        router.push('/');
-    } catch (error: any ) {
-        // Hiển thị lỗi từ API hoặc lỗi mặc định
+            alert('Đăng nhập thành công!');
+
+            if (response.role === 'Admin' || response.role === 'admin') {
+                router.push('/admin'); 
+            } else {
+                router.push('/'); 
+            }
+        }
+    } catch (error: any) {
         alert('Lỗi: ' + (error.message || 'Đăng nhập thất bại'));
     } finally {
         setIsLoading(false);

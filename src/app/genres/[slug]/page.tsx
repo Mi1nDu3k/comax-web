@@ -1,7 +1,7 @@
 // src/app/genres/[slug]/page.tsx
-import { getComicsByGenre, getAllGenres } from '@/Data/genreMock';
-import ComicCard from '@/Components/comics/ComicCard';
-import Pagination from '@/Components/ui/Pagination';
+import { getComicsByGenre, getAllGenres } from '@/data/genreMock';
+import ComicCard from '@/components/comics/ComicCard';
+import Pagination from '@/components/ui/Pagination';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { promises } from 'dns';

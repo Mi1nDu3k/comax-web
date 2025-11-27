@@ -1,10 +1,10 @@
 // src/app/read/[slug]/[chapterSlug]/page.tsx
 
-import { getReaderChapter } from '@/Data/readerMock';
-import ReaderHeader from '@/Components/reader/ReaderHeader';
+import { getReaderChapter } from '@/data/readerMock';
+import ReaderHeader from '@/components/reader/ReaderHeader';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import HistoryTracker from '@/Components/reader/HistoryTracker';
+import HistoryTracker from '@/components/reader/HistoryTracker';
 
 interface ReaderPageProps {
     params: Promise<{ slug: string; chapterSlug: string }>;

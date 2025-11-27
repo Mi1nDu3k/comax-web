@@ -1,7 +1,7 @@
 // src/app/ranking/page.tsx (SERVER COMPONENT)
 
-import { getRankingData } from '@/Data/rankingMock';
-import RankingClient from '@/Components/Ranking/RankingClient';
+import { getRankingData } from '@/data/rankingMock';
+import RankingClient from '@/components/Ranking/RankingClient';
 
 export const metadata = {
     title: 'Bảng Xếp Hạng - Comax Web',

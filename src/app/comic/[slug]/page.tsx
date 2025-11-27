@@ -1,9 +1,9 @@
-import { getComicDetail, ChapterItem } from '@/Data/detailMock';
+import { getComicDetail, ChapterItem } from '@/data/detailMock';
 import Image from 'next/image';
 import Link from 'next/link';
 import { User, BookOpen, Clock, Zap, Star } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import ActionButtons from '@/Components/comics/ActionButtons';
+import ActionButtons from '@/components/comics/ActionButtons';
 
 
 interface ComicDetailPageProps {

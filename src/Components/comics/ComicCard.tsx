@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, Star } from 'lucide-react';
-import { ComicBasic } from '@/Data/homeMock';
+import { ComicBasic } from '@/data/homeMock';
 
 export default function ComicCard({ comic }: { comic: ComicBasic }) {
   return (

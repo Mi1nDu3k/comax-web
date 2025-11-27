@@ -1,4 +1,4 @@
-import AdminHeader from '@/Components/admin/AdminHeader';
+import AdminHeader from '@/components/admin/AdminHeader';
 import { BookOpen, Users, TrendingUp, DollarSign } from 'lucide-react';
 
 interface StatCardProps {

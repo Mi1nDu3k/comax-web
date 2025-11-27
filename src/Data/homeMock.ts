@@ -1,4 +1,4 @@
-// src/data/homeMock.ts
+
 
 export interface ComicBasic {
   id: number;

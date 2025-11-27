@@ -1,11 +1,11 @@
 // src/services/comic.service.ts
 import { fetchClient } from '@/lib/api-client';
-import { HomeData } from '@/Data/homeMock'; 
-import { ComicDetailDto } from '@/Data/detailMock';
+import { HomeData } from '@/data/homeMock'; 
+import { ComicDetailDto } from '@/data/detailMock';
 
 // API: GET /api/home
 export async function getComicDetail(slug: string) {
-  GetbyId(int id)
+  GetbyId(int id);
   return fetchClient<ComicDetailDto>(`/Comics/${slug}`);
 }
 

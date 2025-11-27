@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { RankedComic, RankingData } from '@/Data/rankingMock';
+import { RankedComic, RankingData } from '@/data/rankingMock';
 import { TrendingUp, Eye } from 'lucide-react';
 
 type RankType = 'daily' | 'weekly' | 'monthly';

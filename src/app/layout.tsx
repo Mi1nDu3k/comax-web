@@ -2,9 +2,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Header from '@/Components/layout/Header';
-import Footer from '@/Components/layout/Footer';
-import { ThemeProvider } from '@/Components/common/ThemeProvider';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import { ThemeProvider } from '@/components/common/ThemeProvider';
+import { AuthProvider } from '@/context/AuthContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="vi" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AuthProvider>
           <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-950">
             <Header />
             <main className="flex-grow">
@@ -29,6 +31,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

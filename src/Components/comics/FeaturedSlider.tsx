@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ComicBasic } from '@/Data/homeMock';
+import { ComicBasic } from '@/data/homeMock';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import ComicCard from '@/Components/comics/ComicCard';
+import ComicCard from '@/components/comics/ComicCard';
 import Autoplay from 'embla-carousel-autoplay';
 
 interface FeaturedSliderProps {

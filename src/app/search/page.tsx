@@ -1,7 +1,7 @@
 // src/app/search/page.tsx
 
-import { searchComics } from '@/Data/searchMock';
-import ComicCard from '@/Components/comics/ComicCard';
+import { searchComics } from '@/data/searchMock';
+import ComicCard from '@/components/comics/ComicCard';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
 

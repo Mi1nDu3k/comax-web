@@ -1,10 +1,10 @@
 // src/app/(home)/page.tsx
-import { getHomeData } from '@/Data/homeMock';
-import ComicCard from '../../Components/comics/ComicCard';
+import { getHomeData } from '@/data/homeMock';
+import ComicCard from '../../components/comics/ComicCard';
 import Link from 'next/link';
 import { Flame, ChevronRight, TrendingUp, Zap } from 'lucide-react';
 import Image from 'next/image';
-import FeaturedSlider from '@/Components/comics/FeaturedSlider';
+import FeaturedSlider from '@/components/comics/FeaturedSlider';
 
 export default async function HomePage() {
   // Fetch data (Server Side)

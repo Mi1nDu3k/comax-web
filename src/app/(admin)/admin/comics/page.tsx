@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import AdminHeader from '@/Components/admin/AdminHeader'; // Sửa lại casing import cho đúng chuẩn
-import { MOCK_COMICS, ComicAdmin } from '@/Data/adminMock'; // Sửa lại casing import cho đúng chuẩn
+import AdminHeader from '@/components/admin/AdminHeader'; // Sửa lại casing import cho đúng chuẩn
+import { MOCK_COMICS, ComicAdmin } from '@/data/adminMock'; // Sửa lại casing import cho đúng chuẩn
 import { Trash2, Edit, Plus, Eye, RefreshCw } from 'lucide-react';
 
 export default function AdminComicsPage() {

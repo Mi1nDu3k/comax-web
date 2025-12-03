@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -14,7 +13,7 @@ export default function RegisterPage() {
     username: '',
     email: '',
     password: '',
-    confirmPassword: '', // Chỉ dùng để validate ở frontend
+    confirmPassword: '', 
   });
 
   const [status, setStatus] = useState<{
@@ -30,45 +29,54 @@ export default function RegisterPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Xóa lỗi khi người dùng bắt đầu nhập lại
     if (status.error) setStatus(prev => ({ ...prev, error: null }));
+  };
+
+  // --- 1. SỬA LỖI CÚ PHÁP & LOGIC VALIDATE ---
+  const validatePassword = (password: string) => {
+    // Regex: 8 ký tự, 1 hoa, 1 thường, 1 số, 1 ký tự đặc biệt
+    const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    
+    if (!strongRegex.test(password)) {
+        return "Mật khẩu chưa đủ mạnh! Cần tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
+    }
+    return null; // Hợp lệ
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Validate Client
+    // --- 2. GỌI HÀM VALIDATE MỚI ---
+    const passwordError = validatePassword(formData.password);
+    if (passwordError) {
+        setStatus(prev => ({ ...prev, error: passwordError }));
+        return;
+    }
+
+    // Validate Confirm Password
     if (formData.password !== formData.confirmPassword) {
       setStatus(prev => ({ ...prev, error: 'Mật khẩu nhập lại không khớp!' }));
       return;
     }
 
-    if (formData.password.length < 6) {
-        setStatus(prev => ({ ...prev, error: 'Mật khẩu phải có ít nhất 6 ký tự.' }));
-        return;
-    }
-
     setStatus({ loading: true, error: null, success: false });
 
     try {
-      // 2. Gọi API
-      // Loại bỏ confirmPassword trước khi gửi vì Backend không cần
       const { confirmPassword, ...payload } = formData;
       
+      // Gọi API đăng ký
       await register(payload);
 
-      // 3. Thành công
       setStatus({ loading: false, error: null, success: true });
       
-      // Tự động chuyển trang sau 2 giây
+      // Chuyển trang sau 2 giây
       setTimeout(() => {
         router.push('/auth/login');
       }, 2000);
 
     } catch (error: any) {
-      // 4. Xử lý lỗi từ Backend
-      // Backend thường trả về message lỗi trong error.message hoặc error.response.data
-      const errorMsg = error.message || 'Đăng ký thất bại. Vui lòng thử lại.';
+      // Xử lý lỗi từ Backend trả về (VD: Email đã tồn tại)
+      const errorMsg = error.response?.data?.message || error.message || 'Đăng ký thất bại. Vui lòng thử lại.';
       setStatus({ loading: false, error: errorMsg, success: false });
     }
   };
@@ -152,6 +160,10 @@ export default function RegisterPage() {
                 disabled={status.loading || status.success}
               />
             </div>
+            {/* Gợi ý mật khẩu nhỏ bên dưới */}
+            <p className="text-xs text-gray-500 mt-1">
+                Gợi ý: Tối thiểu 8 ký tự, gồm chữ hoa, số và ký tự đặc biệt.
+            </p>
           </div>
 
           {/* Confirm Password */}
@@ -182,7 +194,7 @@ export default function RegisterPage() {
             }`}
             disabled={status.loading || status.success}
           >
-            {status.loading ? 'Đang tạo tài khoản...' : 'Đăng Ký Ngay'}
+            {status.loading ? 'Đang xử lý...' : 'Đăng Ký Ngay'}
           </button>
         </form>
         
